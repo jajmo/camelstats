@@ -9,13 +9,14 @@ class NLP():
         for tweet in self.tweets:
             if tweet['text'][0] == '@':
                 continue
-            self.polarity[tweet['id']] = {}
-            self.polarity[tweet['id']]['polarity'] = self.getPolarity(tweet)
-            self.polarity[tweet['id']]['date'] = tweet['created_at']
-            self.polarity[tweet['id']]['favorites'] = tweet['favorite_count']
-            self.polarity[tweet['id']]['retweets'] = tweet['retweet_count']
-            self.polarity[tweet['id']]['is_retweet'] = tweet['text'][0:2] == "RT"
-            self.polarity[tweet['id']]['text'] = tweet['text']
+            self.polarity[tweet['id']] = {
+                'polarity': self.getPolarity(tweet),
+                'date': tweet['created_at'],
+                'favorites': tweet['favorite_count'],
+                'retweets': tweet['retweet_count'],
+                'is_retweet': tweet['text'][0:2] == "RT",
+                'text': tweet['text']
+            }
         return self.polarity
 
     def getPolarity(self, tweet):
