@@ -17,6 +17,22 @@ class StockThing:
         startPrice = None
         endPrice = None
 
+        startDaySplit = startDay.split('/')
+        endDaySplit = endDay.split('/')
+
+        if int(startDaySplit[0]) < 10:
+            startDaySplit[0] = startDaySplit[0][1:]
+        if int(startDaySplit[1]) < 10:
+            startDaySplit[1] = startDaySplit[1][1:]
+
+        if int(endDaySplit[0]) < 10:
+            endDaySplit[0] = endDaySplit[0][1:]
+        if int(endDaySplit[1]) < 10:
+            endDaySplit[1] = endDaySplit[1][1:]
+
+        startDay = '/'.join(startDaySplit)
+        endDay = '/'.join(endDaySplit)
+
         with open('tsla_stock.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for line in reader:
