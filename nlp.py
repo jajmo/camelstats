@@ -17,6 +17,7 @@ class NLP():
                 'is_retweet': tweet['text'][0:2] == "RT",
                 'text': tweet['text']
             }
+
         return self.polarity
 
     def getPolarity(self, tweet):
