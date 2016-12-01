@@ -6,10 +6,10 @@ import pprint
 import json
 
 #Twitter API credentials
-consumer_key = "WONUsgfz1rmRQyuLWye1uTD3U"
-consumer_secret = "dQt0nnWB5bpVgpmpWeKHDwNXlKH7ZeLODPTB1hu4BT7CM20Ucd"
-access_key = "236214707-J88sX9mV3K8FQoScLNBQppA3uHZTwitI0XgAWz4y"
-access_secret = "wTyKlerp7vgd4Msb4GaJSVIf3MOw3Z3Ev0MkrTVykZ9oO"
+consumer_key = ""
+consumer_secret = ""
+access_key = ""
+access_secret = ""
 
 pp = pprint.PrettyPrinter(indent=4)
 
