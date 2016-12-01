@@ -28,7 +28,7 @@ for tweetid, tweet in tweets.items():
     nextTweetDate = datetime.datetime.strptime(tweets[tweet['next']]['date'], timeFormat).strftime('%m/%d/%Y')
     change = StockThing.getStockChange(tweetDate, nextTweetDate)
     if type(change) != str:
-        if tweet['polarity'] * float(change) >= 0.0:
+        if float(tweet['polarity']) * float(change) >= 0.0:
             yes += 1
         else:
             no += 1
