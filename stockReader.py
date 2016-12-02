@@ -6,6 +6,13 @@ import csv
 
 class StockThing:
 
+    def __init__(self):
+        self.date_closeprice = {}
+        with open('data/tsla_stock.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for line in reader:
+                self.date_closeprice[line['Date']] = line['Adj Close']
+
     """
     startDay - m/d/yyyy
     endDay - m/d/yyyy
@@ -13,7 +20,7 @@ class StockThing:
              startDay to endDay as a float, or the strings 'Invalid startDay' or
              'Invalid endDay' if either the start or end day could not be found
     """
-    def getStockChange(startDay, endDay):
+    def getStockChange(self, startDay, endDay):
         startPrice = None
         endPrice = None
 
@@ -33,14 +40,8 @@ class StockThing:
         startDay = '/'.join(startDaySplit)
         endDay = '/'.join(endDaySplit)
 
-        with open('tsla_stock.csv', newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for line in reader:
-                if line['Date'] == startDay:
-                    startPrice = line['Adj Close']
-                if line['Date'] == endDay:
-                    endPrice = line['Adj Close']
-        csvfile.close()
+        startPrice = self.date_closeprice.get(startDay, None)
+        endPrice = self.date_closeprice.get(endDay, None)
 
         if (startPrice == None):
             return 'Invalid startDay'

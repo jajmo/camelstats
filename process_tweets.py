@@ -14,36 +14,30 @@ class ProcessTweets:
         return x.processTweets()
 
 
-tweets = ProcessTweets("elonmusk_tweets.json").process()
+tweets = ProcessTweets("data/elonmusk_tweets.json").process()
 timeFormat ='%a %b %d %H:%M:%S %z %Y' 
-#increase = 0
-#decrease = 0
 total = 0
-yes = 1
+yes = 0
 no = 0
+st = StockThing()
 for tweetid, tweet in tweets.items():
     if 'next' not in tweet:
         break
     tweetDate = datetime.datetime.strptime(tweet['date'], timeFormat).strftime('%m/%d/%Y')
     nextTweetDate = datetime.datetime.strptime(tweets[tweet['next']]['date'], timeFormat).strftime('%m/%d/%Y')
-    change = StockThing.getStockChange(tweetDate, nextTweetDate)
+    change = st.getStockChange(tweetDate, nextTweetDate)
     if type(change) != str:
         if float(tweet['polarity']) * float(change) >= 0.0:
             yes += 1
         else:
             no += 1
-        #if tweet['polarity'] >= 0 and change >= 0:
-        #    increase += 1
-        #elif tweet['polarity'] < 0 and change < 0:
-        #    decrease += 1
-        #else:
-        #    no += 1
         total += 1
 
+# sanity check
+assert total == yes + no
 print('Stats:')
 print('--------------------')
 print('Correlation:', yes)
-#print('Decrease:', decrease)
 print('No correlation:', no)
 print('Total:', total)
 print('--------------------')
